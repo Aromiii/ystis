@@ -2,7 +2,7 @@
 ![HeaderImage](github_images/header.jpeg) 
 
 ## Introduction
-This is a demo application built with the goal to learn about Flutter and to create a fun application.
+This was forked from [Tinder-App-Flutter](https://github.com/dgewe/Tinder-App-Flutter). Thanks to Dgewe for the majority of the code.
 
 Tested on Android only.
 
