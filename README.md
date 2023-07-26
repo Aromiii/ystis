@@ -2,7 +2,7 @@
 ![HeaderImage](github_images/header.jpeg) 
 
 ## Introduction
-This was forked from [Tinder-App-Flutter](https://github.com/dgewe/Tinder-App-Flutter). Thanks to Dgewe for the majority of the code.
+This was forked from [Tinder-App-Flutter](https://github.com/dgewe/Tinder-App-Flutter). Thanks to Fredrik Bogg for the majority of the code.
 
 Tested on Android only.
 
