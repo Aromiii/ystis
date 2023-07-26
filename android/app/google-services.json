@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "292363358754",
+    "project_id": "ystis-2eb49",
+    "storage_bucket": "ystis-2eb49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292363358754:android:a3bcc61fbf1b5044b7b07b",
+        "android_client_info": {
+          "package_name": "com.aromiii.ystis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292363358754-v3l3sh12mtponsgbiosaepo10pc7hpqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa7DSlshNk5dTy83XWQDwo8HEgj_F4GYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292363358754-v3l3sh12mtponsgbiosaepo10pc7hpqa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "292363358754-77defeucr94dpdk1n6qgt81a5qf6ov5a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aromiii.ystis"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
