@@ -8,6 +8,7 @@ import 'package:tinder_app_flutter/ui/widgets/bordered_text_field.dart';
 import 'package:tinder_app_flutter/ui/widgets/custom_modal_progress_hud.dart';
 import 'package:tinder_app_flutter/ui/widgets/rounded_button.dart';
 import 'package:tinder_app_flutter/util/constants.dart';
+import 'package:tinder_app_flutter/util/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -22,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String _inputEmail = '';
   String _inputPassword = '';
   bool _isLoading = false;
+  String _error = "";
   late UserProvider _userProvider;
 
   @override
@@ -41,7 +43,11 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.of(context)
             .pushNamedAndRemoveUntil(TopNavigationScreen.id, (route) => false);
       }
+      if (response is Error<UserCredential>) {
+        showSnackBar(_scaffoldKey, response.message);
+      }
     });
+
     setState(() {
       _isLoading = false;
     });
@@ -81,6 +87,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     obscureText: true,
                     keyboardType: TextInputType.text,
                     onChanged: (value) => _inputPassword = value,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20.0),
+                    child: Text(
+                      _error,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16
+                      ),
+                    ),
                   ),
                   Expanded(child: Container()),
                   RoundedButton(text: 'LOGIN', onPressed: () => loginPressed())
