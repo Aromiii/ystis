@@ -72,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         return NameScreen(
             onChanged: (value) => {_userRegistration.name = value});
       case 1:
-        return AgeScreen(onChanged: (value) => {_userRegistration.age = value as int});
+        return AgeScreen(onChanged: (value) => {_userRegistration.age = value});
       case 2:
         return AddPhotoScreen(
             onPhotoChanged: (value) =>
@@ -91,7 +91,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       case 0:
         return (_userRegistration.name.length >= 2);
       case 1:
-        return (_userRegistration.age >= 13 && _userRegistration.age <= 120);
+        print(_userRegistration.age.year != new DateTime.now().year);
+        print(_userRegistration.age.year);
+        print(DateTime.now().year);
+        return (_userRegistration.age.year != new DateTime.now().year);
       case 2:
         return _userRegistration.localProfilePhotoPath.isNotEmpty;
       default:

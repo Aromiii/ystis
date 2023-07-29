@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 class AgeScreen extends StatefulWidget {
-  final Function(num) onChanged;
+  final Function(DateTime) onChanged;
 
   AgeScreen({required this.onChanged});
 
@@ -13,7 +10,7 @@ class AgeScreen extends StatefulWidget {
 }
 
 class _AgeScreenState extends State<AgeScreen> {
-  int age = 0;
+  DateTime age = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +23,11 @@ class _AgeScreenState extends State<AgeScreen> {
             children: [
               Text(
                 'My',
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.displaySmall,
               ),
               Text(
-                'age is',
-                style: Theme.of(context).textTheme.headline3,
+                'birthday is',
+                style: Theme.of(context).textTheme.displaySmall,
               ),
             ],
           ),
@@ -38,22 +35,43 @@ class _AgeScreenState extends State<AgeScreen> {
         Expanded(
           child: Center(
             child: Container(
-              child: NumberPicker(
-                itemWidth: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  value: age,
-                  minValue: 0,
-                  maxValue: 120,
-                  onChanged: (value) => {
-                        setState(() {
-                          age = value;
-                        }),
-                        widget.onChanged(value)
-                      }),
-            ),
+                child: GestureDetector(
+              onTap: () async {
+                final DateTime currentDate = DateTime.now();
+                final DateTime minDate = currentDate.subtract(Duration(days: 120 * 365)); // Minimum age: 120 years
+                final DateTime maxDate = currentDate.subtract(Duration(days: 13 * 365)); // Maximum age: 13 years
+
+                final DateTime? picked = await showDatePicker(
+                    context: context,
+                    initialDate: maxDate,
+                    firstDate: minDate,
+                    lastDate: maxDate,
+                    initialDatePickerMode: DatePickerMode.year,
+                    builder: (context, child) {
+                      return Theme(
+                          data: ThemeData.dark(),
+                          child: child as Widget);
+                    });
+
+                if (picked != null && picked != age) {
+                  setState(() {
+                    age = picked;
+                    widget.onChanged(picked);
+                  });
+                }
+              },
+              child: Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: Text(
+                  "${age.day}/${age.month}/${age.year}",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            )),
           ),
         ),
       ],

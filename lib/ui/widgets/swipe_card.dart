@@ -111,7 +111,7 @@ class _SwipeCardState extends State<SwipeCard> {
                     widget.person.bio.length > 0
                         ? widget.person.bio
                         : "No bio.",
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ),

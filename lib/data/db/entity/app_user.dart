@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AppUser {
   late String id;
   late String name;
-  late int age;
+  late DateTime age;
   late String profilePhotoPath;
   String bio = "";
 

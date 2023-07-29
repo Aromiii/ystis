@@ -1,6 +1,6 @@
 class UserRegistration {
   String name = '';
-  int age = 0;
+  DateTime age = DateTime.now();
   String email = '';
   String password = '';
   String localProfilePhotoPath = '';
