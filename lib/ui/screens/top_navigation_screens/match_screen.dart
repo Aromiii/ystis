@@ -34,9 +34,31 @@ class _MatchScreenState extends State<MatchScreen> {
       }
       _ignoreSwipeIds?.add(myUserId);
     }
-    var res = await _databaseSource.getPersonsToMatchWith(1, _ignoreSwipeIds!);
-    if (res.docs.length > 0) {
-      var userToMatchWith = AppUser.fromSnapshot(res.docs.first);
+
+    var res = await _databaseSource.getPersonsToMatchWith(10, _ignoreSwipeIds!);
+
+    DateTime oldestBirthday = DateTime(2008);
+    DateTime youngestBirthday = DateTime(2009);
+
+    print(oldestBirthday);
+    print(youngestBirthday);
+
+    // Perform age filtering here
+    List<QueryDocumentSnapshot> filteredDocs = [];
+
+    for (var doc in res.docs) {
+      print(doc.data());
+      DateTime age = doc['age'].toDate();
+
+      if (age.isBefore(youngestBirthday) && age.isAfter(oldestBirthday)) {
+        filteredDocs.add(doc);
+        break; // We only need one person, so we can break after finding the first matching person.
+      }
+    }
+
+    if (filteredDocs.isNotEmpty) {
+      var userToMatchWith = AppUser.fromSnapshot(filteredDocs.first);
+      print(userToMatchWith);
       return userToMatchWith;
     } else {
       return null;
@@ -102,7 +124,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                     child: Text('No users',
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline4)),
+                                            .headlineMedium)),
                               );
                             }
                             if (!snapshot.hasData) {

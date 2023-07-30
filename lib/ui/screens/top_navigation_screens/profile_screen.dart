@@ -9,6 +9,7 @@ import 'package:tinder_app_flutter/ui/widgets/input_dialog.dart';
 import 'package:tinder_app_flutter/ui/widgets/rounded_button.dart';
 import 'package:tinder_app_flutter/ui/widgets/rounded_icon_button.dart';
 import 'package:tinder_app_flutter/util/constants.dart';
+import 'package:tinder_app_flutter/util/utils.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -46,8 +47,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             getProfileImage(userSnapshot.data, userProvider),
                             SizedBox(height: 20),
                             Text(
-                                '${userSnapshot.data?.name}, ${userSnapshot.data?.age}',
-                                style: Theme.of(context).textTheme.headline4),
+                                '${userSnapshot.data?.name}, ${calculateAge(userSnapshot.data?.age ?? DateTime.now())}',
+                                style: Theme.of(context).textTheme.headlineMedium),
                             SizedBox(height: 40),
                             getBio(userSnapshot.data, userProvider),
                             Expanded(child: Container()),
@@ -71,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Bio', style: Theme.of(context).textTheme.headline4),
+            Text('Bio', style: Theme.of(context).textTheme.headlineMedium),
             RoundedIconButton(
               onPressed: () {
                 showDialog(
@@ -92,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         SizedBox(height: 5),
         Text(
           user!.bio.length > 0 ? user.bio : "No bio.",
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       ],
     );

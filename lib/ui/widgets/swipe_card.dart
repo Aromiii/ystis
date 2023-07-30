@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tinder_app_flutter/data/db/entity/app_user.dart';
 import 'package:tinder_app_flutter/ui/widgets/rounded_icon_button.dart';
 import 'package:tinder_app_flutter/util/constants.dart';
+import 'package:tinder_app_flutter/util/utils.dart';
 
 class SwipeCard extends StatefulWidget {
   final AppUser person;
@@ -64,7 +65,7 @@ class _SwipeCardState extends State<SwipeCard> {
                   text: widget.person.name,
                   style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 ),
-                TextSpan(text: '  ${widget.person.age}', style: TextStyle(fontSize: 20)),
+                TextSpan(text: '  ${calculateAge(widget.person.age)}', style: TextStyle(fontSize: 20)),
               ],
             )),
           ],

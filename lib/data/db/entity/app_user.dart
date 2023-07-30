@@ -16,7 +16,7 @@ class AppUser {
   AppUser.fromSnapshot(DocumentSnapshot snapshot) {
     id = snapshot['id'];
     name = snapshot['name'];
-    age = snapshot['age'];
+    age = snapshot['age'].toDate();
     profilePhotoPath = snapshot['profile_photo_path'];
     bio = snapshot.get('bio') ?? '';
   }
