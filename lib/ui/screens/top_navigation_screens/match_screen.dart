@@ -173,6 +173,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                                   },
                                                   iconData: Icons.favorite,
                                                   iconSize: 30,
+                                                  buttonColor: kAccentColor,
                                                 ),
                                               ],
                                             ),
