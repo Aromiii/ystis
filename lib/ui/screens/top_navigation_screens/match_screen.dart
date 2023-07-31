@@ -24,7 +24,7 @@ class _MatchScreenState extends State<MatchScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   List<String>? _ignoreSwipeIds;
 
-  Future<AppUser?> loadPerson(String myUserId) async {
+  Future<AppUser?> loadPerson(String myUserId, DateTime myUserAge) async {
     if (_ignoreSwipeIds == null) {
       _ignoreSwipeIds = [];
       var swipes = await _databaseSource.getSwipes(myUserId);
@@ -37,8 +37,8 @@ class _MatchScreenState extends State<MatchScreen> {
 
     var res = await _databaseSource.getPersonsToMatchWith(10, _ignoreSwipeIds!);
 
-    DateTime oldestBirthday = DateTime(2008);
-    DateTime youngestBirthday = DateTime(2009);
+    DateTime oldestBirthday = oldestBirthdayToSwipe(myUserAge);
+    DateTime youngestBirthday = youngestBirthdayToSwipe(myUserAge);
 
     print(oldestBirthday);
     print(youngestBirthday);
@@ -47,7 +47,6 @@ class _MatchScreenState extends State<MatchScreen> {
     List<QueryDocumentSnapshot> filteredDocs = [];
 
     for (var doc in res.docs) {
-      print(doc.data());
       DateTime age = doc['age'].toDate();
 
       if (age.isBefore(youngestBirthday) && age.isAfter(oldestBirthday)) {
@@ -114,7 +113,7 @@ class _MatchScreenState extends State<MatchScreen> {
                       userProvider.user == null || userProvider.isLoading,
                   child: (userSnapshot.hasData)
                       ? FutureBuilder<AppUser?>(
-                          future: loadPerson(userSnapshot.data!.id),
+                          future: loadPerson(userSnapshot.data!.id, userSnapshot.data?.age ?? DateTime.now()),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                     ConnectionState.done &&

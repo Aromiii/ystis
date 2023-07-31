@@ -35,3 +35,37 @@ int calculateAge(DateTime birthDate) {
   }
   return age;
 }
+
+DateTime youngestBirthdayToSwipe(DateTime birthday) {
+  // Calculate the youngest age based on the formula (birthday / 2 + 7)
+  double youngestAge = calculateAge(birthday) / 2 + 7;
+  print(youngestAge);
+
+  // Get the current date
+  DateTime currentDate = DateTime.now();
+
+  // Calculate the birth year based on the age
+  num birthYear = currentDate.year - youngestAge;
+  print(birthYear);
+
+  // Construct and return the birthday
+  DateTime youngestBirthday = DateTime(birthYear.toInt(), currentDate.month, currentDate.day);
+  return youngestBirthday;
+}
+
+DateTime oldestBirthdayToSwipe(DateTime birthday) {
+  // Calculate the youngest age based on the formula (birthday / 2 + 7)
+  double oldestAge = (calculateAge(birthday) - 7) * 2;
+  print(oldestAge);
+
+  // Get the current date
+  DateTime currentDate = DateTime.now();
+
+  // Calculate the birth year based on the age
+  num birthYear = currentDate.year - oldestAge;
+  print(birthYear);
+
+  // Construct and return the birthday
+  DateTime oldestBirthday = DateTime(birthYear.toInt(), currentDate.month, currentDate.day);
+  return oldestBirthday;
+}
